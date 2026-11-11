@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>P1 · O castelo pixel a pixel — Trilha GameDev 2D</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="trilha.css">
+</head>
+<body>
+
+<header class="hud"><div class="dentro">
+  <span class="marca"><img src="img/vida.png" alt="">GameDev 2D · P1</span>
+  <nav>
+    <a href="#sala1">Grade e escala</a><a href="#sala2">Aseprite</a><a href="#sala3">Linha</a><a href="#sala4">Paleta</a>
+    <a href="#sala5">Silhueta</a><a href="#sala6">Cópia de estudo</a><a href="#sala7">Exportar</a><a href="#sala8">Mapa</a>
+  </nav>
+</div></header>
+
+<section class="abertura">
+  <div class="selo">PIXEL ART PARA JOGOS · SITE 1 DE 3 · AULA INICIAL (SÁBADO, PRESENCIAL)</div>
+  <h1>O castelo, <em>pixel a pixel</em>.</h1>
+  <p class="lead">O rei do jogo modelo tem 28 pixels de altura. Cada um deles foi colocado por alguém, de propósito. Hoje você aprende por que cada pixel está ali — grade, linha, paleta e silhueta — e prova isso redesenhando um tile e um quadro do rei no Aseprite. Na última hora, começa o <b>seu</b> jogo: a paleta e as silhuetas do seu elenco.</p>
+  <div class="palco" aria-hidden="true"><div class="sprite porco"></div><div class="sprite rei"></div></div>
+  <div class="inventario">
+    <div class="slot"><img src="img/porta.png" alt=""><div class="rot">Etapa anterior</div><div class="val">C1 · GDD do seu jogo aprovado</div></div>
+    <div class="slot"><img src="img/bau.png" alt=""><div class="rot">Arquivo de partida</div><div class="val"><a href="kit_estudo_P1.zip">kit_estudo_P1.zip</a> (tiles, sprites e paleta em 1x)</div></div>
+    <div class="slot entrega"><img src="img/chave.png" alt=""><div class="rot">Você vai produzir</div><div class="val">Cópia de estudo + paleta e silhuetas do seu elenco (P1.1)</div></div>
+    <div class="slot"><img src="img/porta.png" alt=""><div class="rot">Próxima etapa</div><div class="val"><a href="https://rclepf.github.io/GameDev2D-P1-02/">Site 2 · Estudo da semana (EAD)</a></div></div>
+  </div>
+</section>
+
+<main>
+
+<section class="sala" id="sala1">
+  <div class="sala-cab"><span class="sala-num">SALA 01</span><h2>Grade e escala: o tamanho real do castelo</h2></div>
+  <p class="objetivo">Objetivo: saber em que tamanho desenhar antes de abrir o programa.</p>
+  <p>Pixel art é desenho em <b>grade</b>: cada pixel é uma decisão. Por isso o tamanho vem antes de tudo. O jogo modelo roda numa tela de <b>480 × 270 pixels</b>, ampliada para caber no monitor. Dentro dela:</p>
+  <table>
+    <tr><th>Peça</th><th>Tamanho no castelo</th><th>No seu jogo</th></tr>
+    <tr><td>Tile (bloco de cenário)</td><td>32 × 32 px</td><td>32 × 32 px — <b>obrigatório</b>, é a grade da fase</td></tr>
+    <tr><td>Rei (corpo, sem o martelo)</td><td>≈ 24 × 28 px</td><td>Herói com 24 a 32 px de altura</td></tr>
+    <tr><td>Porco patrulheiro</td><td>≈ 20 × 18 px</td><td>Inimigo comum menor que o herói</td></tr>
+    <tr><td>Tela inteira</td><td>15 × 8,4 tiles</td><td>A mesma</td></tr>
+  </table>
+  <figure><img src="img/escala_grade.png" alt="Cena do castelo ampliada 4 vezes com a grade de tiles de 32 pixels: o rei ocupa menos de um tile de altura e o porco cerca de meio tile"><figcaption>A mesma cena ampliada 4×, com a grade de 32 px em verde. O rei cabe em um tile de altura; o porco, em pouco mais de meio.</figcaption></figure>
+  <p>Em tamanho real (1×), essa cena é assim: <img src="img/escala_1x.png" alt="A mesma cena em tamanho real" style="vertical-align:middle;border:2px solid var(--borda)"></p>
+  <div class="caixa atencao"><span class="tag">Escala inteira, sempre</span>O desenho é feito em 1× e só é ampliado em múltiplos inteiros (2×, 3×, 4×). Ampliar 2,5× faz alguns pixels virarem 2 e outros 3 — o desenho “treme”. A engine e a prancha de portfólio ampliam; o arquivo fica em 1×.</div>
+</section>
+
+<section class="sala" id="sala2">
+  <div class="sala-cab"><span class="sala-num">SALA 02</span><h2>Aseprite essencial</h2></div>
+  <p class="objetivo">Objetivo: deixar o Aseprite pronto para desenhar para o castelo.</p>
+  <div class="passo">
+    <div class="passo-tit"><span class="moeda">1</span>Documento novo do jeito certo</div>
+    <ol>
+      <li><b>File → New</b>: 64 × 64 px, <b>Color Mode: RGBA</b>, <b>Background: Transparent</b>. (Um tile cabe em 32 × 32; o personagem precisa de folga para o golpe.)</li>
+      <li><b>View → Grid → Grid Settings</b>: largura e altura 32. Ligue a grade com <kbd>Ctrl</kbd>+<kbd>'</kbd> ou pelo menu View.</li>
+      <li><b>View → Preview</b> (<kbd>F7</kbd>): uma janelinha que mostra o desenho em 1× enquanto você trabalha ampliado. Ela fica aberta o tempo todo.</li>
+    </ol>
+    <div class="porque"><b>Por quê:</b> quem desenha só ampliado desenha detalhes que somem no jogo. A pré-visualização em 1× é o juiz.</div>
+  </div>
+  <div class="passo">
+    <div class="passo-tit"><span class="moeda">2</span>As ferramentas que importam hoje</div>
+    <table>
+      <tr><th>Ferramenta</th><th>Atalho</th><th>Para quê</th></tr>
+      <tr><td>Lápis (Pencil)</td><td><kbd>B</kbd></td><td>Desenhar pixel a pixel. Ligue <b>Pixel-perfect</b> na barra de opções: ele remove os “cotovelos” das linhas feitas à mão.</td></tr>
+      <tr><td>Borracha</td><td><kbd>E</kbd></td><td>Apagar para transparente.</td></tr>
+      <tr><td>Conta-gotas</td><td><kbd>Alt</kbd> + clique</td><td>Pegar uma cor do desenho.</td></tr>
+      <tr><td>Balde</td><td><kbd>G</kbd></td><td>Preencher áreas fechadas.</td></tr>
+      <tr><td>Linha</td><td><kbd>Shift</kbd> + clique com o lápis</td><td>Linha reta do último ponto até o clique.</td></tr>
+      <tr><td>Camadas</td><td>painel Layers</td><td>Contorno, cor e sombra em camadas separadas enquanto você aprende.</td></tr>
+    </table>
+  </div>
+  <div class="passo">
+    <div class="passo-tit"><span class="moeda">3</span>Carregue a paleta do castelo</div>
+    <p>Baixe o <a href="kit_estudo_P1.zip"><b>kit de estudo</b></a>. No painel de paleta, abra o menu de opções e escolha <b>Load Palette</b> → <code>paleta_castelo.gpl</code>. A partir de agora você só usa essas cores.</p>
+  </div>
+  <div class="caixa dica"><span class="tag">Em casa sem Aseprite?</span>O EAD pode ser feito no <b>LibreSprite</b> ou no <b>Pixelorama</b>, gratuitos. Veja a tabela de programas no <a href="https://rclepf.github.io/GameDev2D-P1-02/#freeware">Site 2 · Estudo da semana</a>.</div>
+</section>
+
+<section class="sala" id="sala3">
+  <div class="sala-cab"><span class="sala-num">SALA 03</span><h2>Linha de um pixel e jaggies</h2></div>
+  <p class="objetivo">Objetivo: desenhar retas e curvas que parecem lisas, mesmo feitas de quadrados.</p>
+  <p>Em pixel art toda linha inclinada é uma <b>escada</b>. O olho aceita a escada quando os degraus seguem um padrão; quando o padrão quebra, aparecem os <b>jaggies</b> — dentes que chamam atenção para o lugar errado.</p>
+  <div class="par">
+    <figure class="bom"><img src="img/linha_boa.png" alt="Linha inclinada com degraus todos de 2 pixels"><figcaption>Degraus iguais (2-2-2-2): a linha parece reta.</figcaption></figure>
+    <figure class="ruim"><img src="img/linha_ruim.png" alt="Linha inclinada com degraus de 3, 1, 3, 1 e 2 pixels"><figcaption>Degraus irregulares (3-1-3-1-2): dentes.</figcaption></figure>
+  </div>
+  <div class="par">
+    <figure class="bom"><img src="img/curva_boa.png" alt="Arco cujos segmentos diminuem de tamanho do topo para os lados"><figcaption>Curva: segmentos que diminuem de forma gradual (6 → 2 → 1 → 1).</figcaption></figure>
+    <figure class="ruim"><img src="img/curva_ruim.png" alt="Arco com segmentos que aumentam e diminuem sem ordem"><figcaption>Curva com segmento que cresce no meio: “quina” no arco.</figcaption></figure>
+  </div>
+  <div class="caixa dica"><span class="tag">Regra prática</span>Numa reta, todos os degraus do mesmo tamanho. Numa curva, os degraus só diminuem (ou só aumentam) até o meio. Contorno de 1 pixel, sem “cotovelos” — é para isso que serve o Pixel-perfect.</div>
+</section>
+
+<section class="sala" id="sala4">
+  <div class="sala-cab"><span class="sala-num">SALA 04</span><h2>Paleta limitada e rampas de cor</h2></div>
+  <p class="objetivo">Objetivo: entender como poucas cores organizadas em rampas dão unidade ao jogo.</p>
+  <p>O castelo usa algumas dezenas de cores, mas quase tudo sai de poucas <b>rampas</b>: sequências da cor mais escura para a mais clara de um mesmo material. O número em cada amostra é o <b>matiz</b> (hue, de 0° a 360°).</p>
+  <div class="rampas">
+<div class="rampa"><b>contorno</b><span class="esc" style="background:#280a00">15°</span><span class="esc" style="background:#3f3851">257°</span><span class="esc" style="background:#6e5967">320°</span></div>
+<div class="rampa"><b>parede</b><span style="background:#926475">338°</span><span style="background:#ad707b">349°</span><span style="background:#c39490">5°</span><span style="background:#d1b1a5">16°</span></div>
+<div class="rampa"><b>plataforma</b><span style="background:#ae444e">354°</span><span style="background:#cd7363">9°</span><span style="background:#e27f6d">9°</span><span style="background:#fbca97">31°</span><span style="background:#ffeab7">42°</span></div>
+<div class="rampa"><b>ouro</b><span class="esc" style="background:#5c2201">22°</span><span class="esc" style="background:#8e491f">23°</span><span class="esc" style="background:#cc8400">39°</span><span style="background:#f8b547">37°</span><span style="background:#ffefa9">49°</span></div>
+<div class="rampa"><b>porco</b><span class="esc" style="background:#25667e">196°</span><span class="esc" style="background:#298a91">184°</span><span class="esc" style="background:#37ab9c">172°</span><span style="background:#48c38a">152°</span><span style="background:#91ea9c">127°</span></div>
+<div class="rampa"><b>metal</b><span style="background:#5d7889">203°</span><span style="background:#768ea1">207°</span><span style="background:#8ca9b5">198°</span><span style="background:#a5c2c7">189°</span><span style="background:#eef5f6">188°</span></div>
+  </div>
+  <h3>Hue shifting: a sombra muda de cor</h3>
+  <p>Olhe a rampa do porco: a sombra não é “verde mais escuro”. Ela <b>gira para o azul</b> (196°) e a luz gira para o amarelo-esverdeado (127°). O ouro faz o mesmo: sombra puxada para o vermelho, luz para o amarelo. Esse deslocamento de matiz é o <b>hue shifting</b> — é o que deixa a cor viva em vez de “suja”.</p>
+  <div class="passo">
+    <div class="passo-tit"><span class="moeda">4</span>Leia uma rampa em voz alta</div>
+    <p>Em dupla, escolha uma rampa e responda: o que acontece com o matiz, a saturação e o brilho da sombra para a luz? Compare com a rampa do metal, que quase não muda de matiz. Por que o metal pode ser assim?</p>
+    <div class="porque"><b>Por quê:</b> no EAD você monta a paleta do <b>seu</b> jogo. Copiar a lógica das rampas do castelo (não as cores) é o atalho mais seguro.</div>
+  </div>
+  <div class="caixa atencao"><span class="tag">Contraste entre personagem e fundo</span>A parede do castelo é clara e pouco saturada; o rei é vermelho e dourado, o porco é verde saturado. Personagem que tem as mesmas cores do fundo desaparece na fase.</div>
+</section>
+
+<section class="sala" id="sala5">
+  <div class="sala-cab"><span class="sala-num">SALA 05</span><h2>Silhueta: o personagem em preto</h2></div>
+  <p class="objetivo">Objetivo: testar se um personagem se reconhece só pela forma.</p>
+  <p>No jogo, o jogador vê o personagem pequeno, em movimento e por meio segundo. Quem lê primeiro é a <b>silhueta</b>. O teste é simples: pinte tudo de uma cor só e veja se ainda dá para dizer quem é e para onde está virado.</p>
+  <figure><img src="img/silhuetas.png" alt="O rei e o porco coloridos e, ao lado de cada um, a mesma figura toda preta"><figcaption>O martelo grande, a coroa e a barba largas fazem o rei ser reconhecível em preto. O porco tem as orelhas e o focinho para a direita.</figcaption></figure>
+  <ul class="lista-check">
+    <li>Um elemento grande e característico (o martelo, a coroa) vale mais que dez detalhes pequenos.</li>
+    <li>Herói e inimigo precisam ter silhuetas diferentes entre si.</li>
+    <li>A direção do olhar e da arma deve ser clara: o jogo espelha o sprite quando o personagem vira.</li>
+  </ul>
+  <div class="caixa dica"><span class="tag">Como fazer no Aseprite</span>Duplique a camada. Com a <b>Varinha Mágica</b>, clique na área transparente e inverta a seleção (<b>Select → Inverse</b>). Pinte de preto com o balde, com a opção <b>Contiguous</b> desligada. Olhe na pré-visualização em 1× e depois apague a camada de teste.</div>
+</section>
+
+<section class="sala" id="sala6">
+  <div class="sala-cab"><span class="sala-num">SALA 06</span><h2>Cópia de estudo: o tile e o rei</h2></div>
+  <p class="objetivo">Objetivo: treinar o método numa cópia de estudo e começar a arte do seu jogo — Atividade P1.1.</p>
+  <p>Copiar uma referência pixel a pixel, sabendo o porquê de cada pixel, é como os pintores aprendiam com os mestres. Você não vai entregar isso como arte sua: é exercício. Os arquivos estão no <a href="kit_estudo_P1.zip">kit de estudo</a>.</p>
+  <div class="caixa atencao"><span class="tag">O castelo é o norte, não o molde</span>A cópia é só exercício: nenhum pixel do castelo entra no seu jogo. Toda a arte do seu jogo — herói, inimigos, chefão, itens e cenário — é desenhada por você a partir do seu GDD. O castelo é a régua de escala e o exemplo do que cada peça precisa ter.</div>
+  <div class="par">
+    <figure><img src="img/estudo_tile.png" alt="Tile do topo do chão do castelo ampliado 12 vezes com grade de pixels"><figcaption><code>tile_chao_topo.png</code> · 32 × 32 px · ampliado 12×</figcaption></figure>
+    <figure><img src="img/estudo_rei.png" alt="Primeiro quadro do rei parado ampliado 10 vezes com grade de pixels"><figcaption><code>rei_idle_000.png</code> · 39 × 28 px · ampliado 10×</figcaption></figure>
+  </div>
+  <div class="passo">
+    <div class="passo-tit"><span class="moeda">5</span>O tile (30 min)</div>
+    <ol>
+      <li>Novo documento 32 × 32, paleta do castelo carregada.</li>
+      <li>Abra a referência ao lado (<b>File → Open</b>, abas lado a lado) e desenhe <b>primeiro o contorno das pedras</b>, depois as cores chapadas, por último luz e sombra.</li>
+      <li>Teste se o tile repete: copie-o 3 vezes lado a lado (ou ligue <b>View → Tiled Mode → Tiled in X Axis</b>). A emenda não pode aparecer.</li>
+    </ol>
+    <div class="porque"><b>Por quê:</b> um tile é desenhado para se repetir. O que parece certo sozinho pode criar uma “costura” quando vira chão de 15 tiles.</div>
+  </div>
+  <div class="passo">
+    <div class="passo-tit"><span class="moeda">6</span>O quadro do rei (50 min)</div>
+    <ol>
+      <li>Novo documento 64 × 64. Camada <i>contorno</i>: desenhe a silhueta (coroa, barba, martelo, pés).</li>
+      <li>Camada <i>cor</i> por baixo: preencha cada área com a cor média da rampa.</li>
+      <li>Camada <i>luz</i>: de onde vem a luz no rei? Anote antes de pôr o primeiro pixel de brilho.</li>
+      <li>Faça o teste de silhueta da Sala 05 na sua cópia.</li>
+    </ol>
+    <div class="porque"><b>Por quê:</b> contorno → cor → luz é a ordem que você vai usar no seu herói. Hoje você treina a ordem com a resposta ao lado.</div>
+  </div>
+  <div class="passo">
+    <div class="passo-tit"><span class="moeda">7</span>Comece o seu jogo (60 min)</div>
+    <ol>
+      <li>Abra o seu GDD da C1 na tabela “No castelo → No seu jogo”: quem é o herói, o inimigo comum, o inimigo de longe e o chefão do <b>seu</b> mundo?</li>
+      <li>Monte a primeira versão da paleta do seu jogo em rampas (pode partir de uma paleta do Lospec) e salve como <code>paleta_meujogo.gpl</code>.</li>
+      <li>Num documento 256 × 64, rascunhe em preto a silhueta dos quatro personagens lado a lado, no tamanho de jogo. Eles precisam ser diferentes só pela forma.</li>
+    </ol>
+    <div class="porque"><b>Por quê:</b> você sai do sábado com o seu jogo já começado e chega ao EAD sabendo o que desenhar. A cópia ensinou o método; daqui em diante, o desenho é seu.</div>
+  </div>
+  <div class="caixa checkpoint"><span class="tag">Checkpoint do instrutor</span>Ao terminar cada peça, chame o instrutor para a correção individual: degraus, cores fora da paleta, pixels soltos.</div>
+</section>
+
+<section class="sala" id="sala7">
+  <div class="sala-cab"><span class="sala-num">SALA 07</span><h2>Exportar para a engine</h2></div>
+  <p class="objetivo">Objetivo: salvar os arquivos no formato e com os nomes que o Godot e a trilha esperam.</p>
+  <table>
+    <tr><th>Regra</th><th>Como</th></tr>
+    <tr><td>Arquivo de trabalho</td><td><b>File → Save</b> em <code>.aseprite</code>: guarda camadas, paleta e grade.</td></tr>
+    <tr><td>Arquivo para o jogo</td><td><b>File → Export As</b> em <code>.png</code>, <b>Resize 100%</b> (1×), fundo transparente.</td></tr>
+    <tr><td>Arquivo para mostrar</td><td>Outra exportação com Resize 400% ou 800%. Nunca use essa no jogo.</td></tr>
+    <tr><td>Nome</td><td><code>tipo_nome_estado_quadro.png</code>, minúsculas, sem acento e sem espaço.</td></tr>
+  </table>
+  <table>
+    <tr><th>Exemplos do padrão da trilha</th></tr>
+    <tr><td><code>heroi_gata_idle_000.png</code> · <code>inimigo_rato_idle_000.png</code> · <code>tile_chao_topo.png</code> · <code>objeto_bau_fechado.png</code></td></tr>
+  </table>
+  <div class="caixa checkpoint"><span class="tag">Fim da aula 1 · Atividade P1.1</span>
+    <ul class="lista-check">
+      <li><code>estudo_tile_chao.png</code> e <code>estudo_rei_idle.png</code> em 1×, fundo transparente.</li>
+      <li>Os dois <code>.aseprite</code> com camadas.</li>
+      <li>Uma imagem 4× de cada, lado a lado com a referência.</li>
+      <li><code>paleta_meujogo.gpl</code> e a imagem com as silhuetas do seu elenco.</li>
+    </ul>
+    Não terminou no sábado? Conclua no início do EAD. Durante a semana você estuda a fundamentação e desenha a arte do <b>seu</b> jogo no <a href="https://rclepf.github.io/GameDev2D-P1-02/">Site 2 · Estudo da semana</a>.
+  </div>
+</section>
+
+<section class="sala" id="sala8">
+  <div class="sala-cab"><span class="sala-num">SALA 08</span><h2>Onde estamos na trilha</h2></div>
+  <div class="mapa">
+    <div class="porta feita"><img src="img/porta.png" alt=""><b>C1</b>GDD ✓</div>
+    <div class="porta aqui"><img src="img/porta.png" alt=""><b>P1</b>Pixel art ◂ você</div>
+    <div class="porta futura"><img src="img/porta.png" alt=""><b>P2</b>Animação</div>
+    <div class="porta futura"><img src="img/porta.png" alt=""><b>P3</b>Fase</div>
+    <div class="porta futura"><img src="img/porta.png" alt=""><b>C2</b>Engine</div>
+    <div class="porta futura"><img src="img/porta.png" alt=""><b>C3</b>Mecânicas</div>
+    <div class="porta futura"><img src="img/porta.png" alt=""><b>C4</b>Áudio</div>
+    <div class="porta futura"><img src="img/porta.png" alt=""><b>C5</b>Publicação</div>
+  </div>
+  <p>O herói, o inimigo e as peças que você desenha nesta semana são animados na P2 e montados em fase na P3. Tudo nasce aqui: mesma grade, mesma paleta.</p>
+  <nav class="vizinhos">
+    <a href="#sala1"><small>Voltar ao início</small>Sala 01 · Grade e escala</a>
+    <a class="prox" href="https://rclepf.github.io/GameDev2D-P1-02/"><small>Próximo · EAD da semana</small>Site 2 · Estudo da semana</a>
+  </nav>
+</section>
+</main>
+
+<footer><b>Trilha GameDev 2D</b> · P1 Pixel Art para Jogos · Site 1 de 3 (Aula inicial) — O castelo, pixel a pixel<br>SENAI CTTI · Assets: série “Criando um jogo DO ZERO com Construct 3” (Gamecraft)</footer>
+<script src="trilha.js"></script>
+</body>
+</html>
